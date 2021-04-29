@@ -42,5 +42,5 @@ Table: Users (id: SERIAL PRIMARY KEY, firstname:varchar(255), lastname:varchar(2
 - quantity of each product in the order
 - user_id
 - status of order (active or complete)
-Table: Orders (id: SERIAL PRIMARY KEY, quantity:integer, user_id:string[foreign key to users table], product_id:string[foreign key to products table])
+Table: Orders (id: SERIAL PRIMARY KEY, status: varchar, quantity:integer, user_id:string[foreign key to users table])
 
