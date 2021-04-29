@@ -60,7 +60,7 @@ export class AuthController {
       conn.release();
       return result;
     } catch (err) {
-      throw new Error(`unable to get all users ${err}`);
+      throw new Error(`unable to get user ${err}`);
     }
   }
 
@@ -73,7 +73,7 @@ export class AuthController {
       conn.release();
       return result;
     } catch (err) {
-      throw new Error(`unable to get all users ${err}`);
+      throw new Error(`unable to delete user ${err}`);
     }
   }
 }
