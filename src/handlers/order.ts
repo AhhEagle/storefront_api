@@ -1,11 +1,17 @@
 import express, { Request, Response } from "express";
 import { OrderController } from "../models/order";
 import decodeToken from "../middlewares/decodeToken";
+import { decode } from "punycode";
+import { products_routes } from "./product";
 
 const order = new OrderController();
 
+const index = async (req: Request, res: Response) => {
+const response = await order.Index();
+return res.status(200).json(response);
+};
+
 const create = async (req: Request, res: Response) => {
-        console.log(res.locals.data.result.id);
     const response = await order.Create(req.body, res.locals.data.result.id);
     return res.status(200).json(response);
   };
@@ -17,8 +23,24 @@ const create = async (req: Request, res: Response) => {
     return res.status(200).json(response);
   };
 
+  const addProduct = async(req:Request, res:Response) =>{
+      const orderId: string = req.params.id;
+      const productId: string = req.body.products;
+      const quantity: number = parseInt(req.body.quantity);
+
+      try{
+          const products = await order.addOrderProduct(quantity, orderId, productId);
+          return res.status(200).json(products);
+      } catch (error){
+        res.status(400);
+      };
+      
+  }
+
   export const order_routes = (app: express.Application) => {
     app.post("/orders", decodeToken, create);
+    app.get("/orders", decodeToken, index);
+    app.post("/orders/:id/products", addProduct);
     app.get("/orders/:user_id", decodeToken, show);
   };
   

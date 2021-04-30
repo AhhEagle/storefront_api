@@ -42,7 +42,10 @@ Table: Users (id: SERIAL PRIMARY KEY, firstname:varchar(255), lastname:varchar(2
 - quantity of each product in the order
 - user_id
 - status of order (active or complete)
-Table: Orders (id: SERIAL PRIMARY KEY, status: varchar(15), quantity:integer, user_id:integer[foreign key to users table id], product_id: integer[foreign key to products table id])
+Table: Orders (id: SERIAL PRIMARY KEY, status: varchar(15),  user_id:integer[foreign key to users table id],)
+
+additionally an order_products table will be created with the following data shape
+Table: order_products (id: SERIAL PRIMARY KEY, quantity Integer, product_id: intger[foreign key to products table id],  order_id:integer[foreign key to orders table id],)
 
 
 
