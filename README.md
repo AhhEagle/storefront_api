@@ -22,6 +22,20 @@ Follow the following steps to create a database for both the dev and test enviro
 ### Migrate
 - at the command line run db-migrate up followed by the table name you want to create. This should be done for the users, orders and products table i.e
     `db-migrate up 20210429051933-users-table-up`
-- to drop a table, run the corresponding 
+- to drop a table, run the corresponding down file to drop any table
+
+### Environment Variables
+This should not be typically included in a project but for this purpose, find below:
+    `POSTGRES_HOST=127.0.0.1`
+     `POSTGRES_USER=shopping_user`
+     `POSTGRES_PASSWORD=password123`
+     `POSTGRES_DB=shoppingdb`
+     `POSTGRES_PORT=5432`
+     `POSTGRES_DB_TEST=shoppingdb_test`
+     `BCRYPT_PASSWORD=olatejuoladimeji` 
+     `PEPPER=peppergang`
+     `TOKEN_SECRET=InterestingSecret123$`
+     `ENV=dev`
+
 
 
