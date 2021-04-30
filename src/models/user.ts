@@ -38,7 +38,7 @@ export class AuthController {
     }
   }
 
-  async Index(): Promise<User> {
+  async Index(): Promise<User[]> {
     try {
       const conn = await pool.connect();
       const sql = "SELECT * FROM users";
@@ -51,7 +51,7 @@ export class AuthController {
     }
   }
 
-  async Show(userId: number): Promise<User> {
+  async Show(userId: number): Promise<User[]> {
     try {
       const conn = await pool.connect();
       const sql = "SELECT * FROM users WHERE id=$1";
@@ -64,7 +64,7 @@ export class AuthController {
     }
   }
 
-  async Delete(userId: number): Promise<User> {
+  async Delete(userId: number): Promise<User[]> {
     try {
       const conn = await pool.connect();
       const sql = "DELETE FROM users WHERE id=$1 RETURNING *";

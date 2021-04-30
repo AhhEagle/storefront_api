@@ -1,4 +1,5 @@
 import pool from "../database";
+import {PoolClient, QueryResult} from 'pg';
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -10,16 +11,15 @@ export type Product = {
   name: string;
   price: string;
   category: string;
-  user_id: number;
 };
 
 export class ProductController {
   async Create(product: Product): Promise<Product> {
     try {
-      const conn = await pool.connect();
+      const conn:PoolClient = await pool.connect();
       const sql =
         "INSERT INTO products (name, price , category) VALUES($1,$2, $3) RETURNING *";
-      const response = await conn.query(sql, [
+      const response : QueryResult = await conn.query(sql, [
         product.name, product.price, product.category
       ]);
       conn.release();
@@ -32,11 +32,11 @@ export class ProductController {
     }
   }
 
-  async Index(): Promise<Product> {
+  async Index(): Promise<Product[]> {
     try {
-      const conn = await pool.connect();
+      const conn:PoolClient = await pool.connect();
       const sql = "SELECT * FROM products";
-      const response = await conn.query(sql);
+      const response:QueryResult = await conn.query(sql);
       conn.release();
       const result = response.rows;
       return result;
@@ -45,7 +45,7 @@ export class ProductController {
     }
   }
 
-  async Show(productId: number): Promise<Product> {
+  async Show(productId: number): Promise<Product[]> {
     try {
       const conn = await pool.connect();
       const sql = "SELECT * FROM products WHERE id=$1";
@@ -58,14 +58,14 @@ export class ProductController {
     }
   }
 
-  async Delete(productId: number): Promise<Product> {
+  async Delete(productId: number): Promise<Product[]> {
     try {
       const conn = await pool.connect();
       const sql = "DELETE FROM users WHERE id=$1 RETURNING *";
       const response = await conn.query(sql, [productId]);
       const result = response.rows;
       conn.release();
-      return result;
+      return response.rows;
     } catch (err) {
       throw new Error(`unable delete product ${err}`);
     }

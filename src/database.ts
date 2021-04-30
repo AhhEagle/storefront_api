@@ -3,28 +3,21 @@ import {Pool} from 'pg';
 
 dotenv.config();
 
-let pool;
+
 
 const{POSTGRES_HOST,POSTGRES_PASSWORD_TEST,POSTGRES_USER, POSTGRES_DB_TEST, POSTGRES_PASSWORD, POSTGRES_DB,POSTGRES_USER_TEST, ENV} = process.env;
 
-if(ENV === 'dev'){
-    pool = new Pool ({
+
+  const pool:Pool = new Pool ({
     host: POSTGRES_HOST,
-    database:'Udacity_project',
+    database: process.env.ENV === 'test' ? 'Udacity_Project_Test':'Udacity_project',
     user:'postgres',
     password:'root123$',
     port: 5432
 });
-}
 
-if(ENV === 'test'){
-    pool = new Pool ({
-    host: POSTGRES_HOST,
-    database:POSTGRES_DB_TEST,
-    user:POSTGRES_USER_TEST,
-    password:POSTGRES_PASSWORD_TEST
-});
-}
+
+
 
 /*host: POSTGRES_HOST,
 database:POSTGRES_DB,

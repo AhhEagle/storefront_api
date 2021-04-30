@@ -1,9 +1,11 @@
 /* Replace with your SQL commands */
-CREATE TABLE orders
+ CREATE TABLE orders
 (
     id SERIAL PRIMARY KEY,
     status VARCHAR(15),
     quantity INTEGER ,
-    product_id INTEGER REFERENCES products(id),
-    user_id integer REFERENCES users(id)
+    product_id INTEGER, 
+    user_id INTEGER, 
+	FOREIGN KEY (product_id) REFERENCES products(id),
+	FOREIGN KEY (user_id) REFERENCES users(id)
 );
