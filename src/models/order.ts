@@ -5,8 +5,6 @@ import {PoolClient, QueryResult} from 'pg';
 export type Order = {
     id?: number;
     status: string;
-    quantity: number;
-    product_id: number;
     user_id?: number
   };
 
@@ -16,9 +14,9 @@ export type Order = {
         try {
           const conn:PoolClient = await pool.connect();
           const sql =
-            "INSERT INTO orders (status, quantity, product_id, user_id) VALUES($1,$2, $3, $4) RETURNING *";
+            "INSERT INTO orders (status,user_id) VALUES($1,$2,) RETURNING *";
           const response : QueryResult = await conn.query(sql, [
-            order.status, order.quantity, order.product_id, user_id
+            order.status,  user_id
           ]);
           conn.release();
           const result = response.rows[0];
