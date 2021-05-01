@@ -3,9 +3,9 @@ import {PoolClient, QueryResult} from 'pg';
 
 
 export type Order = {
-    id: number;
+    id?: number;
     status: string;
-    user_id: number
+    user_id?: number
   };
 
   export class OrderController {
@@ -14,10 +14,8 @@ export type Order = {
         try {
           const conn:PoolClient = await pool.connect();
           const sql =
-            "INSERT INTO orders (status,user_id) VALUES($1,$2,) RETURNING *";
-          const response : QueryResult = await conn.query(sql, [
-            order.status,  user_id
-          ]);
+            "INSERT INTO orders (status,user_id) VALUES($1,$2) RETURNING *";
+          const response : QueryResult = await conn.query(sql, [order.status,user_id]);
           conn.release();
           const result = response.rows[0];
           return result;
