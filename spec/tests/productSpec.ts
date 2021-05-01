@@ -2,12 +2,13 @@ import { ProductController } from '../../src/models/product';
 
 
 const product = new ProductController();
-const id : number = 1;
+const id : number = 2;
 
 
 describe("Product Model", ()=>{
     it('should have a create method', ()=>{
         expect(product.Create).toBeDefined();
+       
     });
 
     it('should have a show method', ()=>{
@@ -23,11 +24,13 @@ describe("Product Model", ()=>{
     });
 
    it('should create a product using the create method', async()=>{
+    console.log("loggged second");
        const result = await product.Create({
            name: 'test',
            price: '100',
            category: "test"
        });
+       console.log("product result", result);
        expect(result.category).toBeDefined();
        expect(result).toBeTruthy();
    });
@@ -42,15 +45,14 @@ describe("Product Model", ()=>{
 
     it('should return the product with the given Id', async()=>{
         const result = await product.Show(id);
-        expect(result.id).toBe(1);
+        expect(result.id).toBe(id);
         expect(result.name).toEqual('test');
         expect(result.category).toBe('test');
     });
 
     it('should return the details of the deleted product', async()=>{
         const result = await product.Delete(id);
-        console.log("deleted", result);
-        expect(result.id).toBe(1);
+        expect(result.id).toBe(id);
         expect(result.name).toEqual('test');
         expect(result.category).toEqual('test');
     });

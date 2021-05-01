@@ -65,4 +65,17 @@ export type Order = {
             throw new Error(`could not add product to order`);
           }
       }
+
+      async Delete(userId: string): Promise<Order> {
+        try {
+          const conn = await pool.connect();
+          const sql = "DELETE FROM orders WHERE id=$1 RETURNING *";
+          const response = await conn.query(sql, [userId]);
+          const result = response.rows[0];
+          conn.release();
+          return result;
+        } catch (err) {
+          throw new Error(`unable to delete user ${err}`);
+        }
+      }
   }

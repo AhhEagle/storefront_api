@@ -64,7 +64,6 @@ export class ProductController {
       const sql = "DELETE FROM products WHERE id=$1 RETURNING *";
       const response = await conn.query(sql, [productId]);
       const result = response.rows[0];
-      console.log("result", result);
       conn.release();
       return result;
     } catch (err) {

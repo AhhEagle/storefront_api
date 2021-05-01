@@ -2,12 +2,13 @@ import {  AuthController } from '../../src/models/user';
 
 
 const user = new AuthController();
-const id : number = 1;
+const id : number = 2;
 
 
 describe("User Model", ()=>{
     it('should have a create method', ()=>{
         expect(user.Create).toBeDefined();
+       
     });
 
     it('should have a show method', ()=>{
@@ -24,11 +25,13 @@ describe("User Model", ()=>{
 
 
    it('should create a user using the create method', async()=>{
+   
        const result = await user.Create({
            firstname: 'test',
            lastname: 'user',
            password: "testpassword"
        });
+       console.log("user response", result);
        expect(result.password).toBeDefined();
        expect(result).toBeTruthy();
    });
@@ -43,14 +46,14 @@ describe("User Model", ()=>{
 
     it('should return the user with the given Id', async()=>{
         const result = await user.Show(id);
-        expect(result.id).toBe(1);
+        expect(result.id).toBe(id);
         expect(result.firstname).toEqual('test');
         expect(result.password.length).toBeGreaterThan(10);
     });
 
     it('should return the details of the deleted user', async()=>{
         const result = await user.Delete(id);
-        expect(result.id).toBe(1);
+        expect(result.id).toBe(id);
         expect(result.firstname).toEqual('test');
         expect(result.lastname).toEqual('user');
         expect(result.password.length).toBeGreaterThan(10);

@@ -12,6 +12,7 @@ const id : number = 1;
 describe("Order Model", ()=>{
     it('should have a create method', ()=>{
         expect(order.Create).toBeDefined();
+       
     });
 
     it('should have an index method', ()=>{
@@ -31,7 +32,7 @@ describe("Order Model", ()=>{
 
 describe('Orders test with a foreign key', ()=>{
         beforeAll(async() =>{
-            await user.Create({
+         await user.Create({
                 firstname: 'test',
                 lastname: 'user',
                 password: "testpassword"
@@ -45,13 +46,26 @@ describe('Orders test with a foreign key', ()=>{
         });
 
         afterAll(async() =>{
+            await order.Delete('1');
             await user.Delete(id);
             await product.Delete(id);
+            console.log("was product called at all");
         });
     it('should create an order', async() =>{
         const response = await order.Create({ status: "completed"}, id);
-        
-    })
+        expect(response).toBeDefined();
+        expect(response).toBeTruthy();
+        expect(response.status).toBeDefined();
+        expect(response.id).toBe(id);
+    });
+
+    it('should show current order by the given user id', async() =>{
+        const response = await order.Show(id);
+        expect(response).toBeDefined();
+        expect(response).toBeTruthy();
+        expect(response.status).toBeDefined();
+        expect(response.id).toBe(id);
+    });
 });
 
 

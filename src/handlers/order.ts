@@ -1,8 +1,6 @@
 import express, { Request, Response } from "express";
 import { OrderController } from "../models/order";
 import decodeToken from "../middlewares/decodeToken";
-import { decode } from "punycode";
-import { products_routes } from "./product";
 
 const order = new OrderController();
 
@@ -23,6 +21,12 @@ const create = async (req: Request, res: Response) => {
     return res.status(200).json(response);
   };
 
+  const deleteOrder = async (req:Request, res:Response)=>{
+    const userId = req.params.id;
+    const response = await order.Delete(userId);
+    return res.status(200).json(response);
+}
+
   const addProduct = async(req:Request, res:Response) =>{
       const orderId: string = req.params.id;
       const productId: string = req.body.products;
@@ -42,6 +46,7 @@ const create = async (req: Request, res: Response) => {
     app.get("/orders", decodeToken, index);
     app.post("/orders/:id/products", addProduct);
     app.get("/orders/:user_id", decodeToken, show);
+    app.delete("/orders", decodeToken, deleteOrder)
   };
   
 
