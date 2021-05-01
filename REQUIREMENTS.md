@@ -8,8 +8,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Index  '/products' [GET]
 - Show   '/products/:id' [GET]
 - Create [token required] '/products' [POST]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+
 
 #### Users
 - Index [token required]    '/users' [GET]
@@ -18,14 +17,14 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Orders
 - Current Order by user (args: user id)[token required] '/orders/:user_id' [GET]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+
 
 ## Data Shapes
 #### Product
 -  id
 - name
 - price
-- [OPTIONAL] category
+
 Table: Products (id: SERIAL PRIMARY KEY, name:varchar(255), price:bigint, category:varchar, user_id:string[foreign key to users table])
 
 #### User
@@ -45,6 +44,12 @@ Table: Users (id: SERIAL PRIMARY KEY, firstname:varchar(255), lastname:varchar(2
 Table: Orders (id: SERIAL PRIMARY KEY, status: varchar(15),  user_id:integer[foreign key to users table id],)
 
 additionally an order_products table will be created with the following data shape
+### Orders_Products
+- id
+- quantity of each product in the order
+- product_id of the products been added to the order
+- order_id the id of the order in which products are been added
+
 Table: order_products (id: SERIAL PRIMARY KEY, quantity Integer, product_id: intger[foreign key to products table id],  order_id:integer[foreign key to orders table id],)
 
 
