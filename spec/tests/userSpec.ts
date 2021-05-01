@@ -9,7 +9,7 @@ const user = new AuthController();
 const id : number = 2;
 const request = supertest(tell);
 const token:string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjUxLCJmaXJzdG5hbWUiOiJ0ZXN0IiwibGFzdG5hbWUiOiJ1c2VyIiwicGFzc3dvcmQiOiIkMmIkMTAkRUFEUFZkS3ptOVlocEFBbGFrU0doLjBpWklxd0FKVlNqdEtmMHN2bUNJL2YvMDJWcVN3UnUifSwiaWF0IjoxNjE5ODg2MTg2fQ.URTT4W3JP82lyinErh3HaWvji9GxkU-wU89ep65ejFE";
-console.log("token", token);
+
 
 
 describe("User Model", ()=>{
@@ -140,6 +140,7 @@ describe("Users handler endpoints", ()=>{
         expect(response.unauthorized).toBe(false);
         done();
     });
+
 
     it('should return deleted user by the specified Id', async(done) => {
         const test = request.get('/users/2').set("Authorization",   token);

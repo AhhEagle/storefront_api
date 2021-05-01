@@ -1,8 +1,12 @@
 import { ProductController } from '../../src/models/product';
+import supertest from 'supertest';
+import {tell} from '../../src/server';
 
 
 const product = new ProductController();
 const id : number = 2;
+const request = supertest(tell);
+const token:string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjUxLCJmaXJzdG5hbWUiOiJ0ZXN0IiwibGFzdG5hbWUiOiJ1c2VyIiwicGFzc3dvcmQiOiIkMmIkMTAkRUFEUFZkS3ptOVlocEFBbGFrU0doLjBpWklxd0FKVlNqdEtmMHN2bUNJL2YvMDJWcVN3UnUifSwiaWF0IjoxNjE5ODg2MTg2fQ.URTT4W3JP82lyinErh3HaWvji9GxkU-wU89ep65ejFE";
 
 
 describe("Product Model", ()=>{
@@ -55,5 +59,82 @@ describe("Product Model", ()=>{
         expect(result.id).toBe(id);
         expect(result.name).toEqual('test');
         expect(result.category).toEqual('test');
+    });
+});
+
+describe("Products handler endpoints", ()=>{
+    beforeEach(()=>{
+        spyOn(ProductController.prototype, 'Create').and.returnValue(
+            Promise.resolve(
+                {
+                    "id": id,
+                    name: 'test',
+                    price: '100',
+                    category: "test"
+                }
+            )
+        );
+        spyOn(ProductController.prototype, 'Index').and.returnValue(
+            Promise.resolve(
+                [{
+                    "id":id,
+                    name: 'test',
+                    price: '100',
+                    category: "test"
+                }]
+            )
+        );
+        spyOn(ProductController.prototype, 'Show').and.returnValue(
+            Promise.resolve(
+                {
+                    "id":id,
+                    name: 'test',
+                    price: '100',
+                    category: "test"
+                }
+            )
+        );
+
+        spyOn(ProductController.prototype, 'Delete').and.returnValue(
+            Promise.resolve(
+                {
+                    "id":id,
+                    name: 'test',
+                    price: '100',
+                    category: "test"
+                }
+            )
+        );
+    });
+   
+    it('should test create products endpoint', async(done) => {
+        const test = request.post('/products').set("Authorization",   token);
+        const response = await test;
+        expect(response.status).toBe(200);
+        expect(response.unauthorized).toBe(false);
+        done();
+    });
+
+    it('should return all created product', async(done) => {
+        const test = request.get('/products');
+        const response = await test;
+        expect(response.status).toBe(200);
+        expect(response.unauthorized).toBe(false);
+        done();
+    });
+    it('should return products by the specified Id', async(done) => {
+        const test = request.get('/products/2');
+        const response = await test;
+        expect(response.status).toBe(200);
+        expect(response.unauthorized).toBe(false);
+        done();
+    });
+
+    it('should return deleted user by the specified Id', async(done) => {
+        const test = request.get('/products/2');
+        const response = await test;
+        expect(response.status).toBe(200);
+        expect(response.unauthorized).toBe(false);
+        done();
     });
 });
