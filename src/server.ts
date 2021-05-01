@@ -21,8 +21,7 @@ users_routes(app);
 products_routes(app);
 order_routes(app);
 
-app.listen(3000, function () {
+export const tell = app.listen(3000, function () {
     console.log(`starting app on: ${address}`)
 });
 
-export default app;

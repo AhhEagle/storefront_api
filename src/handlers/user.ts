@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { User, AuthController } from '../models/user';
 import decodeToken from "../middlewares/decodeToken";
 
+
 const user = new AuthController();
 
 const create = async (req:Request, res:Response)=>{
