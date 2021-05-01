@@ -13,11 +13,11 @@ Follow the following steps to create a database for both the dev and test enviro
 - in psql run the following:
     `CREATE USER postgres WITH PASSWORD 'password123';`
 - in psql run the following to create the test and dev database:
-    `CREATE DATABASE Udacity_projecttesttest;`
-    `CREATE DATABASE Udacity_project;`
+    `CREATE DATABASE udacity_projecttesttest;`
+    `CREATE DATABASE udacity_project;`
 - connect to each database and grant user all privileges i.e
-    `\c Udacity_project`
-    `GRANT ALL PRIVILEGES ON DATABASE Udacity_project TO postgres;`
+    `\c udacity_project`
+    `GRANT ALL PRIVILEGES ON DATABASE udacity_project TO postgres;`
 - to test that it is working run `\dt` and the output should be "No relations found." 
 ### Migrate
 - at the command line run db-migrate up followed by the table name you want to create. This should be done for the users, orders and products table i.e
@@ -29,13 +29,14 @@ This should not be typically included in a project but for this purpose:
      `POSTGRES_HOST=127.0.0.1`
      `POSTGRES_USER=postgres`
      `POSTGRES_PASSWORD=password123`
-     `POSTGRES_DB=Udacity_project`
+     `POSTGRES_DB=udacity_project`
      `POSTGRES_PORT=5432`
-     `POSTGRES_DB_TEST=Udacity_projecttesttest`
+     `POSTGRES_DB_TEST=udacity_projecttesttest`
      `BCRYPT_PASSWORD=olatejuoladimeji` 
      `PEPPER=peppergang`
      `TOKEN_SECRET=InterestingSecret123$`
      `ENV=dev`
+ By default, when `yarn watch` is run, the environment is set to development and as such he database will run on the development server and on port 5432, when running the tests, the environment is changed to test and the database will still run on port 5432
      
  ### Testing
  To test run `npm run test`. It will change the environment to test and utilize the test database. It will as well run the necessary db-migration files and when the test is done, it drops the database.
