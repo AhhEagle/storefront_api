@@ -52,6 +52,6 @@ describe("Product Model", ()=>{
         console.log("deleted", result);
         expect(result.id).toBe(1);
         expect(result.name).toEqual('test');
-        expect(result.category).toEqual('user');
+        expect(result.category).toEqual('test');
     });
 });
