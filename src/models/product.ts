@@ -63,9 +63,9 @@ export class ProductController {
       const conn = await pool.connect();
       const sql = "DELETE FROM users WHERE id=$1 RETURNING *";
       const response = await conn.query(sql, [productId]);
-      const result = response.rows;
+      const result = response.rows[0];
       conn.release();
-      return response.rows[0];
+      return result;
     } catch (err) {
       throw new Error(`unable delete product ${err}`);
     }

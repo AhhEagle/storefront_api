@@ -29,14 +29,12 @@ describe("User Model", ()=>{
            lastname: 'user',
            password: "testpassword"
        });
-       console.log('create:', result);
        expect(result.password).toBeDefined();
        expect(result).toBeTruthy();
    });
 
    it('should return all created users', async()=>{
     const result = await user.Index();
-    console.log("all", result);
     expect(result).toBeDefined();
     expect(result).toBeTruthy();
     expect(result[0].password.length).toBeGreaterThan(10);
@@ -45,7 +43,6 @@ describe("User Model", ()=>{
 
     it('should return the user with the given Id', async()=>{
         const result = await user.Show(id);
-        console.log("get", result);
         expect(result.id).toBe(1);
         expect(result.firstname).toEqual('test');
         expect(result.password.length).toBeGreaterThan(10);
@@ -53,7 +50,6 @@ describe("User Model", ()=>{
 
     it('should return the details of the deleted user', async()=>{
         const result = await user.Delete(id);
-        console.log("deleted", result);
         expect(result.id).toBe(1);
         expect(result.firstname).toEqual('test');
         expect(result.lastname).toEqual('user');

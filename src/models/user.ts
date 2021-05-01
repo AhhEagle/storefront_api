@@ -44,7 +44,6 @@ export class AuthController {
       const sql = "SELECT * FROM users";
       const response = await conn.query(sql);
       const result = response.rows;
-      console.log("result", result);
       conn.release();
       return result;
     } catch (err) {

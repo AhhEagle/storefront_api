@@ -49,6 +49,7 @@ describe("Product Model", ()=>{
 
     it('should return the details of the deleted product', async()=>{
         const result = await product.Delete(id);
+        console.log("deleted", result);
         expect(result.id).toBe(1);
         expect(result.name).toEqual('test');
         expect(result.category).toEqual('user');
