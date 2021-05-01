@@ -2,6 +2,7 @@ import { ProductController } from '../../src/models/product';
 
 
 const product = new ProductController();
+const id : number = 1;
 
 
 describe("Product Model", ()=>{
@@ -30,4 +31,26 @@ describe("Product Model", ()=>{
        expect(result.category).toBeDefined();
        expect(result).toBeTruthy();
    });
+
+   it('should return all created products', async()=>{
+    const result = await product.Index();
+    expect(result).toBeDefined();
+    expect(result).toBeTruthy();
+    expect(result[0].name).toBeDefined();
+    expect(result[0].name).toBe('test');
+    });
+
+    it('should return the product with the given Id', async()=>{
+        const result = await product.Show(id);
+        expect(result.id).toBe(1);
+        expect(result.name).toEqual('test');
+        expect(result.category).toBe('test');
+    });
+
+    it('should return the details of the deleted product', async()=>{
+        const result = await product.Delete(id);
+        expect(result.id).toBe(1);
+        expect(result.name).toEqual('test');
+        expect(result.category).toEqual('user');
+    });
 });

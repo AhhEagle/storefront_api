@@ -45,12 +45,12 @@ export class ProductController {
     }
   }
 
-  async Show(productId: number): Promise<Product[]> {
+  async Show(productId: number): Promise<Product> {
     try {
       const conn = await pool.connect();
       const sql = "SELECT * FROM products WHERE id=$1";
       const response = await conn.query(sql, [productId]);
-      const result = response.rows;
+      const result = response.rows[0];
       conn.release();
       return result;
     } catch (err) {
@@ -58,14 +58,14 @@ export class ProductController {
     }
   }
 
-  async Delete(productId: number): Promise<Product[]> {
+  async Delete(productId: number): Promise<Product> {
     try {
       const conn = await pool.connect();
       const sql = "DELETE FROM users WHERE id=$1 RETURNING *";
       const response = await conn.query(sql, [productId]);
       const result = response.rows;
       conn.release();
-      return response.rows;
+      return response.rows[0];
     } catch (err) {
       throw new Error(`unable delete product ${err}`);
     }

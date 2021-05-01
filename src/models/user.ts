@@ -44,6 +44,7 @@ export class AuthController {
       const sql = "SELECT * FROM users";
       const response = await conn.query(sql);
       const result = response.rows;
+      console.log("result", result);
       conn.release();
       return result;
     } catch (err) {
@@ -51,12 +52,12 @@ export class AuthController {
     }
   }
 
-  async Show(userId: number): Promise<User[]> {
+  async Show(userId: number): Promise<User> {
     try {
       const conn = await pool.connect();
       const sql = "SELECT * FROM users WHERE id=$1";
       const response = await conn.query(sql, [userId]);
-      const result = response.rows;
+      const result = response.rows[0];
       conn.release();
       return result;
     } catch (err) {
@@ -64,12 +65,12 @@ export class AuthController {
     }
   }
 
-  async Delete(userId: number): Promise<User[]> {
+  async Delete(userId: number): Promise<User> {
     try {
       const conn = await pool.connect();
       const sql = "DELETE FROM users WHERE id=$1 RETURNING *";
       const response = await conn.query(sql, [userId]);
-      const result = response.rows;
+      const result = response.rows[0];
       conn.release();
       return result;
     } catch (err) {
