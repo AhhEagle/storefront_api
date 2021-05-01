@@ -1,7 +1,7 @@
 /* Replace with your SQL commands */
  CREATE TABLE orders
 (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY,
     status VARCHAR(15) NOT NULL,
     user_id INTEGER NOT NULL, 
 

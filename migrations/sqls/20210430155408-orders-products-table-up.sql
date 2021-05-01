@@ -1,6 +1,6 @@
 /* Replace with your SQL commands */
 CREATE TABLE order_products (
-    id SERIAL PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY,
     quantity INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
     order_id INTEGER NOT NULL,
