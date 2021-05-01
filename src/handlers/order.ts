@@ -44,7 +44,7 @@ const create = async (req: Request, res: Response) => {
   export const order_routes = (app: express.Application) => {
     app.post("/orders", decodeToken, create);
     app.get("/orders", decodeToken, index);
-    app.post("/orders/:id/products", addProduct);
+    app.post("/orders/:id/products", decodeToken, addProduct);
     app.get("/orders/:user_id", decodeToken, show);
     app.delete("/orders", decodeToken, deleteOrder)
   };
