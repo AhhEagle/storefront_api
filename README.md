@@ -20,8 +20,8 @@ Follow the following steps to create a database for both the dev and test enviro
     `GRANT ALL PRIVILEGES ON DATABASE udacity_project TO postgres;`
 - to test that it is working run `\dt` and the output should be "No relations found." 
 ### Migrate
-- at the command line run db-migrate up followed by the table name you want to create. This should be done for the users, orders and products table i.e
-    `db-migrate up 20210429051933-users-table-up`
+- Run the below code to create db-migration files: 
+        `db-migrate up --config config/database.json -e dev`
 - to drop a table, run the corresponding down file to drop any table
 
 ### Environment Variables

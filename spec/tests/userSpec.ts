@@ -38,7 +38,6 @@ describe("User Model", ()=>{
            lastname: 'user',
            password: "testpassword"
        });
-       console.log("user response", result);
        expect(result.password).toBeDefined();
        expect(result).toBeTruthy();
    });
@@ -114,40 +113,31 @@ describe("Users handler endpoints", ()=>{
         );
     });
    
-    it('should test create user endpoint', async(done) => {
+    it('should test create user endpoint', async() => {
         const test = request.post('/users').set("Authorization",   token);
-        console.log(request.post('/users').set("Authorization",   token));
         const response = await test;
-        console.log("it reached endpoint",response);
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
 
-    it('should return all created users', async(done) => {
+    it('should return all created users', async() => {
         const test = request.get('/users').set("Authorization",   token);
         const response = await test;
-        console.log("it reached endpoint",response);
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
-    it('should return users by the specified Id', async(done) => {
+    it('should return users by the specified Id', async() => {
         const test = request.get('/users/2').set("Authorization",   token);
         const response = await test;
-        console.log("it reached endpoint",response);
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
 
 
-    it('should return deleted user by the specified Id', async(done) => {
+    it('should return deleted user by the specified Id', async() => {
         const test = request.get('/users/2').set("Authorization",   token);
         const response = await test;
-        console.log("it reached endpoint",response);
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
 });

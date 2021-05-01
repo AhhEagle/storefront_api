@@ -28,13 +28,11 @@ describe("Product Model", ()=>{
     });
 
    it('should create a product using the create method', async()=>{
-    console.log("loggged second");
        const result = await product.Create({
            name: 'test',
            price: '100',
            category: "test"
        });
-       console.log("product result", result);
        expect(result.category).toBeDefined();
        expect(result).toBeTruthy();
    });
@@ -107,34 +105,30 @@ describe("Products handler endpoints", ()=>{
         );
     });
    
-    it('should test create products endpoint', async(done) => {
+    it('should test create products endpoint', async() => {
         const test = request.post('/products').set("Authorization",   token);
         const response = await test;
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
 
-    it('should return all created product', async(done) => {
+    it('should return all created product', async() => {
         const test = request.get('/products');
         const response = await test;
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
-    it('should return products by the specified Id', async(done) => {
+    it('should return products by the specified Id', async() => {
         const test = request.get('/products/2');
         const response = await test;
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
 
-    it('should return deleted user by the specified Id', async(done) => {
+    it('should return deleted user by the specified Id', async() => {
         const test = request.get('/products/2');
         const response = await test;
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
 });

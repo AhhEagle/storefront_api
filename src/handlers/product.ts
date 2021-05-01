@@ -18,7 +18,6 @@ const create = async (req: Request, res: Response) => {
 
 const index = async (req: Request, res: Response) => {
   const response = await product.Index();
-  console.log(response);
   return res.status(200).json(response);
 };
 

@@ -13,8 +13,6 @@ const request = supertest(tell);
 const token:string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjUxLCJmaXJzdG5hbWUiOiJ0ZXN0IiwibGFzdG5hbWUiOiJ1c2VyIiwicGFzc3dvcmQiOiIkMmIkMTAkRUFEUFZkS3ptOVlocEFBbGFrU0doLjBpWklxd0FKVlNqdEtmMHN2bUNJL2YvMDJWcVN3UnUifSwiaWF0IjoxNjE5ODg2MTg2fQ.URTT4W3JP82lyinErh3HaWvji9GxkU-wU89ep65ejFE";
 
 
-
-
 describe("Order Model", ()=>{
     it('should have a create method', ()=>{
         expect(order.Create).toBeDefined();
@@ -37,17 +35,19 @@ describe("Order Model", ()=>{
 });
 
 describe('Orders test with a foreign key', ()=>{
+
         beforeAll(async() =>{
-         await user.Create({
+            await user.Create({
                 firstname: 'test',
                 lastname: 'user',
-                password: "testpassword"
+                password: "testpassword",
             });
             await product.Create({
                 name: 'test',
                 price: '100',
                 category: "test"
              });
+
         
         });
 
@@ -55,8 +55,8 @@ describe('Orders test with a foreign key', ()=>{
             await order.Delete('1');
             await user.Delete(id);
             await product.Delete(id);
-            console.log("was product called at all");
         });
+
     it('should create an order', async() =>{
         const response = await order.Create({ status: "completed"}, id);
         expect(response).toBeDefined();
@@ -114,35 +114,32 @@ describe("Orders handler endpoints", ()=>{
         );
     });
    
-    it('should test create order endpoint', async(done) => {
+    it('should test create order endpoint', async() => {
         const test = request.post('/orders').set("Authorization",   token);
         const response = await test;
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
 
-    it('should return all created users', async(done) => {
+    it('should return all created users', async() => {
         const test = request.get('/orders').set("Authorization",   token);
         const response = await test;
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
-    it('should return users by the specified Id', async(done) => {
+    it('should return users by the specified Id', async() => {
         const test = request.get('/orders/1').set("Authorization",   token);
         const response = await test;
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
+       
     });
 
 
-    it('should return deleted user by the specified Id', async(done) => {
+    it('should return deleted user by the specified Id', async() => {
         const test = request.get('/orders/1').set("Authorization",   token);
         const response = await test;
         expect(response.status).toBe(200);
         expect(response.unauthorized).toBe(false);
-        done();
     });
 });

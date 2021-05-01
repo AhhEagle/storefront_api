@@ -54,7 +54,7 @@ Column | Type | Modifiers
 id | integer | not null default
 firstname | character varying(255) | not null
 lastname | character varying(255) | not null
-password | character varying(50) | not null
+password | character varying | not null
 Indexes:
 "users_pkey" PRIMARY KEY, btree (id)
 
