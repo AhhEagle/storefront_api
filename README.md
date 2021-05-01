@@ -39,7 +39,9 @@ This should not be typically included in a project but for this purpose:
  By default, when `yarn watch` is run, the environment is set to development and as such he database will run on the development server and on port 5432, when running the tests, the environment is changed to test and the database will still run on port 5432
      
  ### Testing
- To test run `npm run test`. It will change the environment to test and utilize the test database. It will as well run the necessary db-migration files and when the test is done, it drops the database.
+ To test run `npm run test`. It will change the environment to test and utilize the test database. It will as well run the necessary db-migration files and when the test is done, it drops the database. All test must pass as shown below:
+ <img width="771" alt="Screenshot 2021-05-02 at 00 24 05" src="https://user-images.githubusercontent.com/24871973/116797382-22024300-aadd-11eb-8e32-e5037be069ae.png">
+
 
 
 
