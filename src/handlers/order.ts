@@ -27,6 +27,7 @@ const create = async (req: Request, res: Response) => {
     return res.status(200).json(response);
 }
 
+//To handle adding products to an order i.e many to many
   const addProduct = async(req:Request, res:Response) =>{
       const orderId: string = req.params.id;
       const productId: string = req.body.products;
