@@ -13,7 +13,7 @@ Follow the following steps to create a database for both the dev and test enviro
 - in psql run the following:
     `CREATE USER postgres WITH PASSWORD 'password123';`
 - in psql run the following to create the test and dev database:
-    `CREATE DATABASE udacity_projecttesttest;`
+    `CREATE DATABASE udacity_projecttest;`
     `CREATE DATABASE udacity_project;`
 - connect to each database and grant user all privileges i.e
     `\c udacity_project`
@@ -25,17 +25,6 @@ Follow the following steps to create a database for both the dev and test enviro
 - to drop a table, run the corresponding down file to drop any table
 
 ### Environment Variables
-This should not be typically included in a project but for this purpose:
-     `POSTGRES_HOST=127.0.0.1`
-     `POSTGRES_USER=postgres`
-     `POSTGRES_PASSWORD=password123`
-     `POSTGRES_DB=udacity_project`
-     `POSTGRES_PORT=5432`
-     `POSTGRES_DB_TEST=udacity_projecttesttest`
-     `BCRYPT_PASSWORD=olatejuoladimeji` 
-     `PEPPER=peppergang`
-     `TOKEN_SECRET=InterestingSecret123$`
-     `ENV=dev`
  By default, when `yarn watch` is run, the environment is set to development and as such he database will run on the development server and on port 5432, when running the tests, the environment is changed to test and the database will still run on port 5432
      
  ### Testing
